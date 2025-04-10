@@ -21,6 +21,10 @@ const alumnoDB = {
     conexion.query('INSERT INTO alumnos SET ?', alumno, funcionResultado);
   },
 
+  insertarImagen: (nombreArchivo, callback) => {
+    conexion.query('INSERT INTO images (filename) VALUES (?)', [nombreArchivo], callback || (() => {}));
+  },
+
   mostrarTodos: (funcionResultado) => {
     conexion.query('SELECT * FROM alumnos', funcionResultado);
   },
@@ -48,7 +52,7 @@ const alumnoDB = {
   test: () => {
     const nuevoAlumno = {
       matricula: 'A12345',
-      nombre: 'Ejemplo Alumno',
+      nombre: 'kevin',
       carrera: 'ITI',
       status: true
     };
