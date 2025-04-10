@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
-// const db = require('./module/db');
+const db = require('./module/db');
 const alumnoDB = require('./module/model');
 const apiRouter = require('./routes/api');
 
