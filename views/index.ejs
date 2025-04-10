@@ -1,0 +1,12 @@
+<% layout('layout') -%>
+<h1 class="mb-4">Galería de Imágenes</h1>
+<a class="btn btn-primary mb-3" href="/upload">Subir nueva imagen</a>
+<div class="row">
+  <% images.forEach(image => { %>
+    <div class="col-md-4 mb-4">
+      <div class="card">
+        <img src="/uploads/<%= image.filename %>" class="card-img-top" alt="Imagen">
+      </div>
+    </div>
+  <% }) %>
+</div>
