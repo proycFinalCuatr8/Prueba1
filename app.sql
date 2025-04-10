@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS imagenes_app;
-USE imagenes_app;
+CREATE DATABASE IF NOT EXISTS proyectofinal;
+USE proyectofinal;
 
 CREATE TABLE images (
   id INT AUTO_INCREMENT PRIMARY KEY,
