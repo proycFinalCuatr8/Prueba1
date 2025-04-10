@@ -1,12 +1,18 @@
-<% layout('layout') -%>
-<h1 class="mb-4">Galería de Imágenes</h1>
-<a class="btn btn-primary mb-3" href="/upload">Subir nueva imagen</a>
+<%- include('layout') %>
+
+<h2>Galería de imágenes</h2>
 <div class="row">
-  <% images.forEach(image => { %>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <img src="/uploads/<%= image.filename %>" class="card-img-top" alt="Imagen">
+  <% if (images.length > 0) { %>
+    <% images.forEach(img => { %>
+      <div class="col-md-3 mb-4">
+        <div class="card">
+          <img src="/uploads/<%= img.filename %>" class="card-img-top" alt="Imagen">
+        </div>
       </div>
-    </div>
-  <% }) %>
+    <% }) %>
+  <% } else { %>
+    <p>No hay imágenes aún.</p>
+  <% } %>
 </div>
+
+<%- include('footer') %>

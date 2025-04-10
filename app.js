@@ -1,11 +1,12 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const db = require('./db');
+const db = require('./module/db'); // conexión con promesas
+const alumnoDB = require('./module/model'); // lógica de alumnos
 const apiRouter = require('./routes/api');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 
 // Configuración de multer
 const storage = multer.diskStorage({
@@ -42,3 +43,14 @@ app.use('/api', apiRouter);
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+app.get('/alumnos', (req, res) => {
+  alumnoDB.mostrarTodos((err, rows) => {
+    if (err) return res.send('Error al obtener alumnos');
+    res.render('alumnos', { alumnos: rows });
+  });
+});
+
+// Prueba de alumnos
+alumnoDB.test();
+

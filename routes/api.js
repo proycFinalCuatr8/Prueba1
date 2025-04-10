@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../db');
+const db = require('../module/db');
 const router = express.Router();
 
 // Obtener todas las imágenes

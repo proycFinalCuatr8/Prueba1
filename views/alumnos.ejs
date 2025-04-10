@@ -1,0 +1,27 @@
+<%- include('layout') %>
+
+<section>
+  <h2>Listado de alumnos</h2>
+  <% if (alumnos.length > 0) { %>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Matrícula</th>
+        <th>Nombre</th>
+        <th>Carrera</th>
+        <th>Status</th>
+      </tr>
+      <% alumnos.forEach(alumno => { %>
+        <tr>
+          <td><%= alumno.id %></td>
+          <td><%= alumno.matricula %></td>
+          <td><%= alumno.nombre %></td>
+          <td><%= alumno.carrera %></td>
+          <td><%= alumno.status ? 'Activo' : 'Inactivo' %></td>
+        </tr>
+      <% }) %>
+    </table>
+  <% } else { %>
+    <p>No hay alumnos registrados.</p>
+  <% } %>
+</section>
