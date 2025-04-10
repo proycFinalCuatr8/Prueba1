@@ -8,6 +8,19 @@ const apiRouter = require('./routes/api');
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+/* Función para subir fotos
+function subirImagenDapi(req, res) {
+  const file = req.file; // Archivo subido
+  const filename = file.filename; // Nombre del archivo
+  const filepath = file.path; // Ruta del archivo
+
+  // Aquí puedes guardar la información en la base de datos o hacer lo que necesites
+  console.log('Archivo subido:', filename, filepath);
+  res.json({ message: 'Archivo subido correctamente', filename });
+}
+*/
+
+
 // Configuración de multer
 const storage = multer.diskStorage({
   destination: './uploads/',
