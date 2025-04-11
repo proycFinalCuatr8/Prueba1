@@ -19,10 +19,10 @@
     </div>
   </form>
 
-  <% if (alumnoPorId) { %>
+  <% if (typeof alumnoPorId !== 'undefined' && alumnoPorId) { %>
     <div class="card mb-4">
       <div class="card-body">
-        <p><strong>Nombre:</strong><%= alumnoPorId.nombre %> </p>
+        <p><strong>Nombre:</strong> <%= alumnoPorId.nombre %></p>
           <p><strong>matricula:</strong> <%= alumnoPorId.matricula %></p>
         <p><strong>Carrera:</strong> <%= alumnoPorId.carrera %></p>
         <p><strong>Status:</strong> <%= alumnoPorId.status ? 'Activo' : 'Inactivo' %></p>
