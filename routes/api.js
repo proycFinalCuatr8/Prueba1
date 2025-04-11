@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const db = require('../module/db');
-
 const alumnoDB = require('../module/model'); 
 
-router.get('/buscar-id', async (req, res) => {
+router.get('/api/buscar-id', async (req, res) => {
   const id = req.query.id;
   try {
     const [rows] = await db.query('SELECT * FROM images WHERE id = ?', [id]);
@@ -19,7 +18,7 @@ router.get('/buscar-id', async (req, res) => {
     res.status(500).send('Error al buscar imagen por ID');
   }
 });
-router.get('/buscar-alumno', async (req, res) => {
+router.get('/api/buscar-alumno', async (req, res) => {
   const { campo, valor } = req.query;
 
   if (!campo || !valor) {

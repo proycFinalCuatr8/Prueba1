@@ -8,7 +8,7 @@
 <!-- Buscar Imagen por ID -->
 <div class="container mb-9">
   <h4>Buscar imagen por ID</h4>
-  <form action="/buscar-id" method="GET" class="row g-5">
+  <form action="/api/buscar-id" method="GET" class="row g-5">
     <div class="col-auto">
       <input type="number" name="id" class="form-control" placeholder="Introduce ID de la imagen" required>
     </div>
@@ -27,7 +27,7 @@
 </div>
 
 <!-- Buscar por cualquier dato -->
-<form action="/buscar-alumno" method="GET" class="row g-3">
+<form action="/api/buscar-alumno" method="GET" class="row g-3">
   <div class="col-md-3">
     <select name="campo" class="form-select" required>
       <option value="nombre">Nombre</option>
