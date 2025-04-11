@@ -25,7 +25,7 @@ const upload = multer({ storage });
 
 app.use('/api', apiRouter);
 
-app.get('/', async (req, res) => {
+app.get('/api', async (req, res) => {
   try {
     const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
     const [alumnos] = await db.query('SELECT * FROM alumnos ORDER BY id DESC');
