@@ -33,11 +33,11 @@ router.get('/buscar-general', async (req, res) => {
     const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
     res.render('index', {
       alumnoPorId: null,
-      alumnosFiltrados: [],
+      alumnosFiltrados: alumnosResult,
       images: []
     });
   } catch (error) {
-    console.error('Error en /api/buscar-general:', error);
+    console.error('Error en /buscar-general:', error);
     res.status(500).send('Error al buscar alumno');
   }
 });
