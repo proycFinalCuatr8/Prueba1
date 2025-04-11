@@ -82,7 +82,7 @@ app.post('/api/upload', async (req, res) => {
 });
 
 // Subir imagen (POST /api/upload-image)
-app.post('/api/upload-image', upload.single('image'), async (req, res) => {
+app.post('/api/upload', upload.single('image'), async (req, res) => {
   try {
     const filename = req.file.filename;
     await alumnoDB.insertarImagen(filename);

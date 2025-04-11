@@ -3,21 +3,23 @@ const router = express.Router();
 const db = require('../module/db');
 const alumnoDB = require('../module/model'); 
 
-router.get('/api/buscar-id', async (req, res) => {
-  const id = req.query.id;
+// Buscar imagen por ID
+router.get('/buscar-id', async (req, res) => {
+  const { id } = req.query;
+  if (!id) return res.status(400).json({ error: 'ID requerido' });
+
   try {
-    const [rows] = await db.query('SELECT * FROM images WHERE id = ?', [id]);
-    res.render('index', {
-      imagenPorId: rows[0] || null,
-      images: [],
-      alumnosFiltrados: [],
-      alumnoPorId: null
-    });
-  } catch (error) {
-    console.error('Error en /buscar-id:', error);
-    res.status(500).send('Error al buscar imagen por ID');
+    const [result] = await db.query('SELECT * FROM images WHERE id = ?', [id]);
+    if (result.length === 0) return res.status(404).json({ error: 'No encontrada' });
+    res.json(result[0]);
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).json({ error: 'Error interno' });
   }
 });
+
+module.exports = router;
+
 router.get('/api/buscar-alumno', async (req, res) => {
   const { campo, valor } = req.query;
 
