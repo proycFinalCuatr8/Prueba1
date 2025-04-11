@@ -1,4 +1,3 @@
-// module/model.js
 const mysql = require('mysql2/promise');
 
 let conexion;
@@ -30,6 +29,15 @@ const alumnoDB = {
   insertarImagen: (nombreArchivo) => {
     return new Promise((resolve, reject) => {
       conexion.query('INSERT INTO images (filename) VALUES (?)', [nombreArchivo], (err, res) => {
+        if (err) return reject(err);
+        resolve(res);
+      });
+    });
+  },
+
+  insertar: (alumno) => {
+    return new Promise((resolve, reject) => {
+      conexion.query('INSERT INTO alumnos SET ?', alumno, (err, res) => {
         if (err) return reject(err);
         resolve(res);
       });

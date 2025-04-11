@@ -1,9 +1,8 @@
-// ===== routes/api.js =====
 const express = require('express');
 const router = express.Router();
 const db = require('../module/db');
 
-const alumnoDB = require('../module/model'); // Asegúrate que ya esté importado
+const alumnoDB = require('../module/model'); 
 
 router.get('/buscar-id', async (req, res) => {
   const id = req.query.id;
@@ -46,7 +45,6 @@ router.get('/buscar-alumno', async (req, res) => {
   }
 });
 
-// Petición a la base de datos para obtener alumnos por campo
 router.post('/alumnos', async (req, res) => {
   const { campo, valor } = req.body;
 
@@ -71,7 +69,6 @@ router.post('/alumnos', async (req, res) => {
   res.redirect('/');
 });
 
-// Guardar nuevo alumno
 router.post('/registrar-alumno', async (req, res) => {
   const { matricula, nombre, carrera, status } = req.body;
   const nuevoAlumno = {
