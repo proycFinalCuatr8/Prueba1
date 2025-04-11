@@ -21,7 +21,8 @@
   <% if (alumnoPorId) { %>
     <div class="card mb-4">
       <div class="card-body">
-        <h5 class="card-title"><%= alumnoPorId.nombre %> - <%= alumnoPorId.matricula %></h5>
+        <p><strong>Nombre:</strong><%= alumnoPorId.nombre %> </p>
+          <p><strong>matricula:</strong> <%= alumnoPorId.matricula %></p>
         <p><strong>Carrera:</strong> <%= alumnoPorId.carrera %></p>
         <p><strong>Status:</strong> <%= alumnoPorId.status ? 'Activo' : 'Inactivo' %></p>
         <img src="/uploads/<%= alumnoPorId.imagen %>" class="img-fluid rounded" alt="Foto del alumno">
@@ -41,6 +42,12 @@
       <button type="submit" class="btn btn-success mb-3">Buscar</button>
     </div>
   </form>
+
+  <!-- Botón para limpiar la búsqueda y volver al inicio -->
+<div class="text-center mb-5">
+  <a href="/" class="btn btn-secondary">Limpiar búsqueda</a>
+</div>
+
 
   <% if (alumnosFiltrados) { %>
     <div class="row">

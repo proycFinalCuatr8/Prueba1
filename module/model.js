@@ -48,7 +48,7 @@ const alumnoDB = {
   test: () => {
     const nuevoAlumno = {
       matricula: 'A12345',
-      nombre: 'Ejemplo Alumno',
+      nombre: 'kevin',
       carrera: 'ITI',
       status: true
     };
