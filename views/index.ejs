@@ -1,17 +1,61 @@
 <%- include('layout') %>
 
-<h2>Galería de imágenes</h2>
-<div class="row">
-  <% if (images.length > 0) { %>
-    <% images.forEach(img => { %>
-      <div class="col-md-3 mb-4">
-        <div class="card">
-          <img src="/uploads/<%= img.filename %>" class="card-img-top" alt="Imagen">
-        </div>
+<!-- Imagen destacada y bienvenida -->
+<div class="text-center mb-5">
+  <h2>Bienvenido a la Galería del Proyecto Final</h2>
+  <p class="lead">Consulta alumnos por ID o cualquier dato, y visualiza su imagen y detalles registrados.</p>
+</div>
+
+<!-- Buscar por ID -->
+<div class="container mb-5">
+  <h4>Buscar alumno por ID</h4>
+  <form action="/buscar-id" method="GET" class="row g-3">
+    <div class="col-auto">
+      <input type="number" name="id" class="form-control" placeholder="Introduce ID del alumno" required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary mb-3">Buscar</button>
+    </div>
+  </form>
+
+  <% if (alumnoPorId) { %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-title"><%= alumnoPorId.nombre %> - <%= alumnoPorId.matricula %></h5>
+        <p><strong>Carrera:</strong> <%= alumnoPorId.carrera %></p>
+        <p><strong>Status:</strong> <%= alumnoPorId.status ? 'Activo' : 'Inactivo' %></p>
+        <img src="/uploads/<%= alumnoPorId.imagen %>" class="img-fluid rounded" alt="Foto del alumno">
       </div>
-    <% }) %>
-  <% } else { %>
-    <p>No hay imágenes aún.</p>
+    </div>
+  <% } %>
+</div>
+
+<!-- Buscar por cualquier dato -->
+<div class="container mb-5">
+  <h4>Buscar alumno por cualquier dato</h4>
+  <form action="/buscar-general" method="GET" class="row g-3">
+    <div class="col-auto">
+      <input type="text" name="q" class="form-control" placeholder="Nombre, carrera, matrícula..." required>
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-success mb-3">Buscar</button>
+    </div>
+  </form>
+
+  <% if (alumnosFiltrados) { %>
+    <div class="row">
+      <% alumnosFiltrados.forEach(al => { %>
+        <div class="col-md-4 mb-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= al.nombre %> - <%= al.matricula %></h5>
+              <p><strong>Carrera:</strong> <%= al.carrera %></p>
+              <img src="/uploads/<%= al.imagen %>" class="img-fluid rounded" alt="Foto del alumno">
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
   <% } %>
 </div>
 
