@@ -50,7 +50,7 @@
 </div>
 
 
-  <% if (alumnosFiltrados) { %>
+<% if (typeof alumnosFiltrados !== 'undefined' && alumnosFiltrados.length > 0) { %>
     <div class="row">
       <% alumnosFiltrados.forEach(al => { %>
         <div class="col-md-4 mb-4">

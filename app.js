@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
   const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
   res.render('index', {
     alumnoPorId: null,
-    alumnosFiltrados: null,
+    alumnosFiltrados: [],
     images
   });
 });

@@ -11,8 +11,8 @@ router.get('/buscar-id', async (req, res) => {
     const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
     res.render('index', {
       alumnoPorId: alumnoResult[0] || null,
-      alumnosFiltrados: null,
-      images
+      alumnosFiltrados: [],
+      images: []
     });
   } catch (error) {
     console.error('Error en /api/buscar-id:', error);
@@ -31,8 +31,8 @@ router.get('/buscar-general', async (req, res) => {
     const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
     res.render('index', {
       alumnoPorId: null,
-      alumnosFiltrados: alumnosResult,
-      images
+      alumnosFiltrados: [],
+      images: []
     });
   } catch (error) {
     console.error('Error en /api/buscar-general:', error);
