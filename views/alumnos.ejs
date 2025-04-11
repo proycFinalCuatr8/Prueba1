@@ -2,7 +2,7 @@
 
 <div class="container mt-5">
   <h2>Registrar Alumno</h2>
-  <form action="/alumnos" method="POST">
+  <form action="/registrar-alumno" method="POST">
     <div class="mb-3">
       <label for="matricula" class="form-label">Matrícula</label>
       <input type="text" class="form-control" id="matricula" name="matricula" required>
@@ -13,13 +13,25 @@
     </div>
     <div class="mb-3">
       <label for="carrera" class="form-label">Carrera</label>
-      <input type="text" class="form-control" id="carrera" name="carrera" required>
+  <select class="form-select" name="carrera" id="carrera" required>
+    <option value="">Selecciona una carrera</option>
+    <option value="Ingeniería Mecatrónica">Ingeniería Mecatrónica</option>
+    <option value="Ingeniería en Biotecnología">Ingeniería en Biotecnología</option>
+    <option value="Ingeniería en Informática">Ingeniería en Informática</option>
+    <option value="Ingeniería en Energía">Ingeniería en Energía</option>
+    <option value="Ingeniería Logística y Transporte">Ingeniería Logística y Transporte</option>
+    <option value="Ingeniería en Tecnología Ambiental">Ingeniería en Tecnología Ambiental</option>
+    <option value="Ingeniería Biomédica">Ingeniería Biomédica</option>
+    <option value="Ingeniería en Animación y Efectos Visuales">Ingeniería en Animación y Efectos Visuales</option>
+    <option value="Ingeniería en Nanotecnología">Ingeniería en Nanotecnología</option>
+    <option value="Ingeniería en Energía y Desarrollo Sostenible">Ingeniería en Energía y Desarrollo Sostenible</option>
+  </select>
     </div>
-    <div class="form-check mb-3">
+    <div class="mb-3 form-check">
       <input type="checkbox" class="form-check-input" id="status" name="status">
       <label class="form-check-label" for="status">Activo</label>
     </div>
-    <button type="submit" class="btn btn-primary">Registrar</button>
+    <button type="submit" class="btn btn-primary">Guardar</button>
   </form>
 </div>
 

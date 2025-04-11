@@ -20,28 +20,75 @@ router.get('/buscar-id', async (req, res) => {
     res.status(500).send('Error al buscar imagen por ID');
   }
 });
+router.get('/buscar-alumno', async (req, res) => {
+  const { campo, valor } = req.query;
 
+  if (!campo || !valor) {
+    return res.status(400).send('Faltan parámetros: campo y valor');
+  }
 
-// Buscar alumno por cualquier campo
-router.get('/buscar-general', async (req, res) => {
-  const q = `%${req.query.q}%`;
   try {
-    const [alumnosResult] = await db.query(
-      `SELECT * FROM alumnos WHERE nombre LIKE ? OR carrera LIKE ? OR matricula LIKE ?`,
-      [q, q, q]
+    const [resultados] = await db.query(
+      `SELECT * FROM alumnos WHERE ${campo} LIKE ?`,
+      [`%${valor}%`]
     );
     const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
+
     res.render('index', {
       alumnoPorId: null,
-      alumnosFiltrados: alumnosResult,
-      images: []
+      alumnosFiltrados: resultados,
+      imagenPorId: null,
+      images
     });
   } catch (error) {
-    console.error('Error en /buscar-general:', error);
-    res.status(500).send('Error al buscar alumno');
+    console.error('Error en /buscar-alumno:', error);
+    res.status(500).send('Error al buscar alumnos');
   }
 });
 
+// Petición a la base de datos para obtener alumnos por campo
+router.post('/alumnos', async (req, res) => {
+  const { campo, valor } = req.body;
 
+  if (!campo || !valor) {
+    return res.status(400).send('Faltan parámetros: campo y valor');
+  }
+
+  try {
+    const [resultados] = await db.query(
+      `SELECT * FROM alumnos WHERE ${campo} LIKE ?`,
+      [`%${valor}%`]
+    );
+    res.locals.alumnoPorId = null;
+    res.locals.alumnosFiltrados = resultados;
+    res.locals.imagenPorId = null;
+    const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
+    res.locals.images = images;
+  } catch (error) {
+    console.error('Error en /alumnos:', error);
+    res.locals.alumnosFiltrados = [];
+  }
+  res.redirect('/');
+});
+
+// Guardar nuevo alumno
+router.post('/registrar-alumno', async (req, res) => {
+  const { matricula, nombre, carrera, status } = req.body;
+  const nuevoAlumno = {
+    matricula,
+    nombre,
+    carrera,
+    status: status === 'on' ? 1 : 0
+  };
+
+  try {
+    await alumnoDB.insertar(nuevoAlumno);
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error al registrar alumno:', err);
+    res.status(500).send('Error al guardar el alumno');
+  }
+  res.redirect('/');
+});
 
 module.exports = router;

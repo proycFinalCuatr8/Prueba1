@@ -26,16 +26,33 @@ const upload = multer({ storage });
 // Rutas desde api.js
 app.use('/', apiRouter);
 
-// Ruta base para mostrar galería inicial
 app.get('/', async (req, res) => {
+  try {
+    const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
+    const [alumnos] = await db.query('SELECT * FROM alumnos ORDER BY id DESC');
+    res.render('index', {
+      alumnoPorId: null,
+      alumnosFiltrados: [],
+      imagenPorId: null,
+      images,
+      alumnos
+    });
+  } catch (error) {
+    console.error('Error al cargar la vista principal:', error);
+    res.status(500).send('Error al cargar la página');
+  }
+});
+
+// Cargar vista para formulario de búsqueda (sin datos iniciales)
+app.get('/alumnos', async (req, res) => {
   const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
-  res.render('index', {
+  res.render('alumnos', {
     alumnoPorId: null,
     alumnosFiltrados: [],
+    imagenPorId: null,
     images
   });
 });
-
 // Función subirImagen: procesa la imagen y la guarda vía model.js
 app.post('/upload', upload.single('image'), async (req, res) => {
   try {
