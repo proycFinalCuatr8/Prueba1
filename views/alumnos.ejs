@@ -1,27 +1,26 @@
 <%- include('layout') %>
 
-<section>
-  <h2>Listado de alumnos</h2>
-  <% if (alumnos.length > 0) { %>
-    <table border="1">
-      <tr>
-        <th>ID</th>
-        <th>Matrícula</th>
-        <th>Nombre</th>
-        <th>Carrera</th>
-        <th>Status</th>
-      </tr>
-      <% alumnos.forEach(alumno => { %>
-        <tr>
-          <td><%= alumno.id %></td>
-          <td><%= alumno.matricula %></td>
-          <td><%= alumno.nombre %></td>
-          <td><%= alumno.carrera %></td>
-          <td><%= alumno.status ? 'Activo' : 'Inactivo' %></td>
-        </tr>
-      <% }) %>
-    </table>
-  <% } else { %>
-    <p>No hay alumnos registrados.</p>
-  <% } %>
-</section>
+<div class="container mt-5">
+  <h2>Registrar Alumno</h2>
+  <form action="/alumnos" method="POST">
+    <div class="mb-3">
+      <label for="matricula" class="form-label">Matrícula</label>
+      <input type="text" class="form-control" id="matricula" name="matricula" required>
+    </div>
+    <div class="mb-3">
+      <label for="nombre" class="form-label">Nombre</label>
+      <input type="text" class="form-control" id="nombre" name="nombre" required>
+    </div>
+    <div class="mb-3">
+      <label for="carrera" class="form-label">Carrera</label>
+      <input type="text" class="form-control" id="carrera" name="carrera" required>
+    </div>
+    <div class="form-check mb-3">
+      <input type="checkbox" class="form-check-input" id="status" name="status">
+      <label class="form-check-label" for="status">Activo</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Registrar</button>
+  </form>
+</div>
+
+<%- include('footer') %>

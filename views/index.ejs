@@ -7,30 +7,27 @@
   <p class="lead">Consulta alumnos por ID o cualquier dato, y visualiza su imagen y detalles registrados.</p>
 </div>
 
-<!-- Buscar por ID -->
+<!-- Buscar Imagen por ID -->
 <div class="container mb-5">
-  <h4>Buscar alumno por ID</h4>
+  <h4>Buscar imagen por ID</h4>
   <form action="/buscar-id" method="GET" class="row g-3">
     <div class="col-auto">
-      <input type="number" name="id" class="form-control" placeholder="Introduce ID del alumno" required>
+      <input type="number" name="id" class="form-control" placeholder="Introduce ID de la imagen" required>
     </div>
     <div class="col-auto">
       <button type="submit" class="btn btn-primary mb-3">Buscar</button>
     </div>
   </form>
 
-  <% if (typeof alumnoPorId !== 'undefined' && alumnoPorId) { %>
+  <% if (typeof imagenPorId !== 'undefined' && imagenPorId) { %>
     <div class="card mb-4">
-      <div class="card-body">
-        <p><strong>Nombre:</strong> <%= alumnoPorId.nombre %></p>
-          <p><strong>matricula:</strong> <%= alumnoPorId.matricula %></p>
-        <p><strong>Carrera:</strong> <%= alumnoPorId.carrera %></p>
-        <p><strong>Status:</strong> <%= alumnoPorId.status ? 'Activo' : 'Inactivo' %></p>
-        <img src="/uploads/<%= alumnoPorId.imagen %>" class="img-fluid rounded" alt="Foto del alumno">
+      <div class="card-body text-center">
+        <img src="/uploads/<%= imagenPorId.filename %>" class="img-fluid rounded" style="max-height: 400px;" alt="Imagen por ID">
       </div>
     </div>
   <% } %>
 </div>
+
 
 <!-- Buscar por cualquier dato -->
 <div class="container mb-5">
@@ -50,7 +47,7 @@
 </div>
 
 
-<% if (typeof alumnosFiltrados !== 'undefined' && alumnosFiltrados.length > 0) { %>
+<% if (Array.isArray(alumnosFiltrados) && alumnosFiltrados.length > 0) { %>
     <div class="row">
       <% alumnosFiltrados.forEach(al => { %>
         <div class="col-md-4 mb-4">

@@ -3,22 +3,24 @@ const express = require('express');
 const router = express.Router();
 const db = require('../module/db');
 
-// Buscar alumno por ID
+const alumnoDB = require('../module/model'); // Asegúrate que ya esté importado
+
 router.get('/buscar-id', async (req, res) => {
   const id = req.query.id;
   try {
-    const [alumnoResult] = await db.query('SELECT * FROM alumnos WHERE id = ?', [id]);
-    const [images] = await db.query('SELECT * FROM images ORDER BY id DESC');
+    const [rows] = await db.query('SELECT * FROM images WHERE id = ?', [id]);
     res.render('index', {
-      alumnoPorId: alumnoResult[0] || null,
+      imagenPorId: rows[0] || null,
+      images: [],
       alumnosFiltrados: [],
-      images: []
+      alumnoPorId: null
     });
   } catch (error) {
-    console.error('Error en /api/buscar-id:', error);
-    res.status(500).send('Error al buscar por ID');
+    console.error('Error en /buscar-id:', error);
+    res.status(500).send('Error al buscar imagen por ID');
   }
 });
+
 
 // Buscar alumno por cualquier campo
 router.get('/buscar-general', async (req, res) => {
@@ -39,5 +41,7 @@ router.get('/buscar-general', async (req, res) => {
     res.status(500).send('Error al buscar alumno');
   }
 });
+
+
 
 module.exports = router;

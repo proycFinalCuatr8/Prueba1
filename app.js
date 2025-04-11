@@ -2,8 +2,9 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const multer = require('multer');
+const alumnoDB = require('./module/model');
 const db = require('./module/db');
-const apiRouter = require('./routes/api');
+const apiRouter = require('./routes/api.js');
 
 const PORT = process.env.PORT || 4000;
 
@@ -33,6 +34,21 @@ app.get('/', async (req, res) => {
     alumnosFiltrados: [],
     images
   });
+});
+
+// Función subirImagen: procesa la imagen y la guarda vía model.js
+app.post('/upload', upload.single('image'), async (req, res) => {
+  try {
+    const filename = req.file.filename;
+    await alumnoDB.insertarImagen(filename); // Usa función del modelo
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error al subir imagen:', err);
+    res.status(500).send('Error al subir imagen');
+  }
+});
+app.get('/upload', (req, res) => {
+  res.render('upload');
 });
 
 app.listen(PORT, () => {
